@@ -98,7 +98,7 @@ jobs:
       python-version: '3.8'
       sources-folder: 'package-name'
       test-folder: 'tests/integration'
-      test-dependencies: 'pytest pytest-docker'
+      test-dependencies: 'pytest pytest-cov pytest-docker'
       codecov-flags: ''  # Do not upload
 ```
 
@@ -164,7 +164,7 @@ jobs:
       base-folder: 'libs/package-name'
       sources-folder: 'package-name'
       test-folder: 'tests/integration'
-      test-dependencies: 'pytest pytest-docker'
+      test-dependencies: 'pytest pytest-cov pytest-docker'
       codecov-flags: ''  # Do not upload
 ```
 
