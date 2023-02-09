@@ -4,12 +4,12 @@ on:
     inputs:
       sources-folder:
         required: false
-	type: string
-	default: 'src'
+        type: string
+        default: 'src'
       base-folder:
         required: false
-	type: string
-	default: '.'
+        type: string
+        default: '.'
 
 jobs:
   lint:
@@ -21,4 +21,4 @@ jobs:
         uses: psf/black@stable
         with:
           options: '--check --verbose'
-	  src: ${{ inputs.base-folder }}/${{ inputs.sources-folder }}
+          src: ${{ inputs.base-folder }}/${{ inputs.sources-folder }}
