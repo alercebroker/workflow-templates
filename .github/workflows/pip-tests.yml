@@ -5,27 +5,27 @@ on:
       python-version:
         required: false
         type: string
-	default: '3.10'
+        default: '3.10'
       sources-folder:
         required: false
-	type: string
-	default: 'src'
+        type: string
+        default: 'src'
       test-folder:
         required: false
         type: string
-	default: 'tests'
+        default: 'tests'
       test-dependencies:
         required: false
         type: string
-	default: 'pytest pytest-cov'
+        default: 'pytest pytest-cov'
       codecov-flags:
         required: false
         type: string
-	default: 'unittest'
+        default: 'unittest'
       base-folder:
         required: false
-	type: string
-	default: '.'
+        type: string
+        default: '.'
 
 jobs:
   test:
@@ -41,8 +41,8 @@ jobs:
         run: |
           cd ${{ inputs.base-folder }}
           pip install --upgrade pip
-	  pip install -r requirements.txt
-	  pip install ${{ inputs.test-dependencies }}
+          pip install -r requirements.txt
+          pip install ${{ inputs.test-dependencies }}
       - name: Tests with pytest
         run: |
           cd ${{ inputs.base-folder }}
