@@ -14,6 +14,9 @@ on:
         required: false
         type: string
         default: 'tests'
+      pre-dependencies:
+        required: false
+        type: string
       test-dependencies:
         required: false
         type: string
@@ -41,6 +44,8 @@ jobs:
         run: |
           cd ${{ inputs.base-folder }}
           pip install --upgrade pip
+          if [ ${{ inputs.pre-dependencies }} != '' ]; then pip install ${{ inputs.pre-dependencies }}; fi
+          pip install ${{ inputs.pre-dependencies }}
           pip install -r requirements.txt
           pip install ${{ inputs.test-dependencies }}
       - name: Tests with pytest
