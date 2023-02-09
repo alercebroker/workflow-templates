@@ -29,6 +29,10 @@ on:
         required: false
         type: string
         default: '.'
+      test-command:
+        required: false
+        type: string
+        default: 'pytest -x ${{ inputs.test-folder }} --cov ${{ inputs.sources-folder }} --cov-report xml'
 
 jobs:
   test:
@@ -40,18 +44,26 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version }}
+      - name: Install pre dependencies
+        if: ${{ inputs.pre-dependencies != '' }}
+        run: |
+          cd ${{ inputs.base-folder }}
+          pip install --upgrade pip
+          pip install ${{ inputs.pre-dependencies }}
       - name: Install dependencies
         run: |
           cd ${{ inputs.base-folder }}
           pip install --upgrade pip
-          if [ ${{ inputs.pre-dependencies }} != '' ]; then pip install ${{ inputs.pre-dependencies }}; fi
-          pip install ${{ inputs.pre-dependencies }}
           pip install -r requirements.txt
-          pip install ${{ inputs.test-dependencies }}
-      - name: Tests with pytest
+      - name: Install test dependencies
         run: |
           cd ${{ inputs.base-folder }}
-          pytest -x ${{ inputs.test-folder }} --cov ${{ inputs.sources-folder }} --cov-report xml
+          pip install --upgrade pip
+          pip install ${{ inputs.test-dependencies }}
+      - name: Tests
+        run: |
+          cd ${{ inputs.base-folder }}
+          ${{ inputs.pytest-command }}
       - name: Upload test coverage to Codecov
         if: ${{ inputs.codecov-flags != '' }}
         uses: codecov/codecov-action@v3
