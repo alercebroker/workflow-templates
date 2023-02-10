@@ -63,7 +63,7 @@ jobs:
       - name: Tests
         run: |
           cd ${{ inputs.base-folder }}
-          ${{ inputs.pytest-command }}
+          ${{ inputs.test-command }}
       - name: Upload test coverage to Codecov
         if: ${{ inputs.codecov-flags != '' }}
         uses: codecov/codecov-action@v3
