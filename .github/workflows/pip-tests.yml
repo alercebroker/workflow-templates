@@ -17,6 +17,10 @@ on:
       pre-dependencies:
         required: false
         type: string
+      requirements-file:
+        required: false
+        type: string
+        default: 'requirements.txt'
       test-dependencies:
         required: false
         type: string
@@ -54,7 +58,7 @@ jobs:
         run: |
           cd ${{ inputs.base-folder }}
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r ${{ inputs.requirements-file }}
       - name: Install test dependencies
         run: |
           cd ${{ inputs.base-folder }}
