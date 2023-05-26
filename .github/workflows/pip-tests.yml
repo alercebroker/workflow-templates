@@ -37,16 +37,16 @@ on:
         required: false
         type: string
         default: 'pytest -x ${{ inputs.test-folder }} --cov ${{ inputs.sources-folder }} --cov-report xml'
-      github-token:
+    secrets:
+      GH_TOKEN:
         required: false
-        type: string
-        default: ''
+        description: 'A github PAT that enables installation of package from private repo'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ inputs.github-token }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
