@@ -37,10 +37,16 @@ on:
         required: false
         type: string
         default: 'pytest -x ${{ inputs.test-folder }} --cov ${{ inputs.sources-folder }} --cov-report xml'
+      github-token:
+        required: false
+        type: string
+        default: ''
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ inputs.github-token }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
